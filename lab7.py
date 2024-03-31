@@ -1,10 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 from time import perf_counter
 import random
+
 # Var3!
 # Задание 1 (сравнение перемножения стандартных списков и массивов numpy)
+
 list1 = [random.randint(1, 99) for i in range(1000000)] # миллион случайных чисел от 1 до 99
 list2 = [random.randint(1, 99) for i in range(1000000)]
 
@@ -23,31 +24,35 @@ array_time = end_time - start_time
 
 print("list time: ", list_time)
 print("NumPy array time: ", array_time)
-print("массивы NumPy считаются быстрее")
+if list_time > array_time:
+    print("массивы NumPy считаются быстрее")
+else:
+    print("не быстрее :(")
 
 # задание 2 (графики 1 от 4 и 1 от 18)
-def tableLoad():
-    arr = np.genfromtxt('data1.csv', delimiter=';')
-    time = arr[:100, 0]
-    time = time[:, np.newaxis]
-    position = arr[:100, 3]
-    position = position[:, np.newaxis]
-    cons = arr[:100, 17]
-    cons = cons[:, np.newaxis]
 
-    plt.plot(time, position * 50, 'b', time, cons, 'r')
-    plt.show()
+arr = np.genfromtxt('data1.csv', delimiter=';')
+time = arr[:100, 0]
+time = time[:, np.newaxis]
+position = arr[:100, 3]
+position = position[:, np.newaxis]
+cons = arr[:100, 17]
+cons = cons[:, np.newaxis]
 
-    # График корреляции между положением дроссельной заслонки(%) и расходом топлива:
-    correlation = np.corrcoef(position.flatten(), cons.flatten())[0, 1]
-    plt.scatter(position, cons)
-    plt.xlabel('position * 50')
-    plt.ylabel('Fuel Consumption')
-    plt.title('График корреляции')
-    plt.show()
-if __name__ == '__main__':
-    tableLoad()
+plt.plot(time, position * 50, 'b', time, cons, 'r')
+plt.show()
+
+# График корреляции между положением дроссельной заслонки(%) и расходом топлива:
+
+correlation = np.corrcoef(position.flatten(), cons.flatten())[0, 1]
+plt.scatter(position, cons)
+plt.xlabel('position * 50')
+plt.ylabel('Fuel Consumption')
+plt.title('График корреляции')
+plt.show()
+
 # задание 3(трёхмерный график по формуле x∈(-5п;5п); y=cos(x); z=sin(x))
+
 xs = np.linspace(-5*np.pi, 5*np.pi)
 ys = np.cos(xs)
 zs = np.sin(xs)
