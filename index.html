@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=3.0">
+    <title>Список посещенных городов</title>
+</head>
+<body style="background-color: tan;">
+    <h1 style="text-align: center;">Список посещенных городов</h1>
+    <table style="margin: 0 auto;">
+        <tr>
+            <th>Город|</th>
+            <th>Дата посещения</th>
+        </tr>
+        {% for town in towns %}
+        <tr>
+            <td>{{ town.city }}</td>
+            <td>{{ town.visit_date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <form method="post">
+        <label for="city">Город:</label>
+        <input type="text" id="city" name="city" required>
+        <label for="visit_date">Дата посещения:</label>
+        <input type="date" id="visit_date" name="visit_date" required>
+        <button type="submit">Добавить</button>
+    </form>
+</body>
+</html>
